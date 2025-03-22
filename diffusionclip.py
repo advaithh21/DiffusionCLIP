@@ -8,6 +8,7 @@ from PIL import Image
 import torch
 from torch import nn
 import torchvision.utils as tvu
+from huggingface_hub import hf_hub_download
 
 from models.ddpm.diffusion import DDPM
 from models.improved_ddpm.script_util import i_DDPM
@@ -1053,7 +1054,7 @@ class DiffusionCLIP(object):
         #         img = Image.open(self.args.img_path).convert("RGB")
         # else:
         img = Image.open(self.args.img_path).convert("RGB")
-        img = img.resize((self.config.data.image_size, self.config.data.image_size), Image.ANTIALIAS)
+        img = img.resize((self.config.data.image_size, self.config.data.image_size), Image.LANCZOS)
         img = np.array(img) / 255
         img = torch.from_numpy(img).type(torch.FloatTensor).permute(2, 0, 1).unsqueeze(dim=0)
         img = img.to(self.config.device)
@@ -1068,7 +1069,8 @@ class DiffusionCLIP(object):
             elif self.config.data.category == "church_outdoor":
                 url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/church_outdoor.ckpt"
         elif self.config.data.dataset == "CelebA_HQ":
-            url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/celeba_hq.ckpt"
+            # url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/celeba_hq.ckpt"
+            url = "https://huggingface.co/gwang-kim/DiffusionCLIP-CelebA_HQ/blob/main/celeba_hq.ckpt"
         elif self.config.data.dataset == "AFHQ":
             pass
         else:
@@ -1082,7 +1084,9 @@ class DiffusionCLIP(object):
                 if model_path:
                     ckpt = torch.load(model_path)
                 else:
-                    ckpt = torch.hub.load_state_dict_from_url(url, map_location=self.device)
+                    checkpoint_path = hf_hub_download(repo_id="gwang-kim/DiffusionCLIP-CelebA_HQ", filename="celeba_hq.ckpt")
+                    ckpt = torch.load(checkpoint_path, map_location=self.device)  # or "cuda"
+                    # ckpt = torch.hub.load_state_dict_from_url(url, map_location=self.device)
                 learn_sigma = False
             elif self.config.data.dataset in ["FFHQ", "AFHQ"]:
                 model_i = i_DDPM(self.config.data.dataset)
