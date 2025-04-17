@@ -920,12 +920,12 @@ class DiffusionCLIP(object):
         if self.config.data.dataset == "LSUN":
             if self.config.data.category == "bedroom":
                 # url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/bedroom.ckpt"
-                url = "https://huggingface.co/gwang-kim/DiffusionCLIP-LSUN_Bedroom/blob/main/bedroom.ckpt"
+                url = "https://huggingface.co/gwang-kim/DiffusionCLIP-LSUN_Bedroom/resolve/main/bedroom.ckpt"
             elif self.config.data.category == "church_outdoor":
                 url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/church_outdoor.ckpt"
         elif self.config.data.dataset == "CelebA_HQ":
             # url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/celeba_hq.ckpt"
-            url = "https://huggingface.co/gwang-kim/DiffusionCLIP-CelebA_HQ/blob/main/celeba_hq.ckpt"
+            url = "https://huggingface.co/gwang-kim/DiffusionCLIP-CelebA_HQ/resolve/main/celeba_hq.ckpt"
         elif self.config.data.dataset in ["FFHQ", "AFHQ", "IMAGENET"]:
             pass
         else:
