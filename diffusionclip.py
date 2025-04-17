@@ -1065,7 +1065,8 @@ class DiffusionCLIP(object):
         # ----------- Models -----------#
         if self.config.data.dataset == "LSUN":
             if self.config.data.category == "bedroom":
-                url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/bedroom.ckpt"
+                # url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/bedroom.ckpt"
+                url = "https://huggingface.co/gwang-kim/DiffusionCLIP-LSUN_Bedroom/blob/main/bedroom.ckpt"
             elif self.config.data.category == "church_outdoor":
                 url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/church_outdoor.ckpt"
         elif self.config.data.dataset == "CelebA_HQ":
