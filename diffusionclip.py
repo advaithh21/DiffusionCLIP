@@ -19,7 +19,7 @@ from losses.clip_loss import CLIPLoss
 from datasets.data_utils import get_dataset, get_dataloader
 from configs.paths_config import DATASET_PATHS, MODEL_PATHS, HYBRID_MODEL_PATHS, HYBRID_CONFIG
 from datasets.imagenet_dic import IMAGENET_DIC
-from utils.align_utils import run_alignment
+from utils.align_utils import run_alignment, run_alignment_direct
 
 class DiffusionCLIP(object):
     def __init__(self, args, config, device=None):
@@ -1052,9 +1052,11 @@ class DiffusionCLIP(object):
 
         if self.args.align_face and self.config.data.dataset in ["FFHQ", "CelebA_HQ"]:
             try:
-                img = run_alignment(self.args.img_path, output_size=self.config.data.image_size)
+                # img = run_alignment(self.args.img_path, output_size=self.config.data.image_size)
+                img = run_alignment(img)
             except:
-                img = Image.open(self.args.img_path).convert("RGB")
+                # img = Image.open(self.args.img_path).convert("RGB")
+                img = img.convert("RGB")
         else:
             img = Image.open(self.args.img_path).convert("RGB")
         img = img.resize((self.config.data.image_size, self.config.data.image_size), Image.Resampling.LANCZOS)
