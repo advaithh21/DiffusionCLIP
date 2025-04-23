@@ -1047,7 +1047,7 @@ class DiffusionCLIP(object):
                     tvu.save_image((x + 1) * 0.5, os.path.join(self.args.image_folder,
                                                            f'3_gen_t{self.args.t_0}_it{it}_ninv{self.args.n_inv_step}_ngen{self.args.n_test_step}_mrat{self.args.model_ratio}.png'))
 
-    def edit_one_image_return(self):
+    def edit_one_image_return(self, img):
         n = self.args.bs_test
 
         if self.args.align_face and self.config.data.dataset in ["FFHQ", "CelebA_HQ"]:
