@@ -1119,6 +1119,7 @@ class DiffusionCLIP(object):
             #---------------- Invert Image to Latent in case of Deterministic Inversion process -------------------#
             if self.args.deterministic_inv:
                 x_lat_path = os.path.join(self.args.image_folder, f'x_lat_t{self.args.t_0}_ninv{self.args.n_inv_step}.pth')
+                print(x_lat_path)
                 if not os.path.exists(x_lat_path):
                     seq_inv = np.linspace(0, 1, self.args.n_inv_step) * self.args.t_0
                     seq_inv = [int(s) for s in list(seq_inv)]
