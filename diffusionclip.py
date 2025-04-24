@@ -990,7 +990,7 @@ class DiffusionCLIP(object):
 
                             progress_bar.update(1)
                         x_lat = x.clone()
-                        torch.save(x_lat, x_lat_path)
+                        torch.save(x_lat.cpu(), x_lat_path)
                 else:
                     print('Latent exists.')
                     x_lat = torch.load(x_lat_path)
