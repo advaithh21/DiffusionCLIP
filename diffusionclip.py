@@ -1053,7 +1053,7 @@ class DiffusionCLIP(object):
         if self.args.align_face and self.config.data.dataset in ["FFHQ", "CelebA_HQ"]:
             try:
                 # img = run_alignment(self.args.img_path, output_size=self.config.data.image_size)
-                img = run_alignment(img, self.config.data.image_size)
+                img = run_alignment_direct(img, self.config.data.image_size)
             except:
                 # img = Image.open(self.args.img_path).convert("RGB")
                 img = img.convert("RGB")
